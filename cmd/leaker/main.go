@@ -13,6 +13,7 @@ import (
 
 var (
 	flagProcs = flag.Int("procs", 20, "concurrency")
+	flagScore = flag.Int("score", 70, "score")
 )
 
 type Processor struct {
@@ -35,10 +36,15 @@ func main() {
 		os.Exit(1)
 	}
 
+	score := float64(*flagScore)
+	if score < 1.0 {
+		score = 70.0
+	}
+
 	processor := Processor{
 		w: os.Stdout,
 		validators: []leaker.Validator{
-			leaker.NewZxcvbnValidator(50.0),
+			leaker.NewZxcvbnValidator(score),
 		},
 	}
 	w := swork.NewWorkerGroup(*flagProcs, processor)

@@ -20,7 +20,7 @@ func testFiles(t *testing.T, suf string) {
 	processor := Processor{
 		w: buf,
 		validators: []leaker.Validator{
-			leaker.NewZxcvbnValidator(50.0),
+			leaker.NewZxcvbnValidator(70.0),
 		},
 	}
 
